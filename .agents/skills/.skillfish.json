@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "fastapi-patterns",
+  "owner": "lobbi-docs",
+  "repo": "claude",
+  "path": "plugins/fastapi-backend/skills/fastapi-patterns",
+  "branch": "main",
+  "sha": "77b45208cd75d0e00ee9a89ba341c88e7c9a439e",
+  "source": "manual"
+}

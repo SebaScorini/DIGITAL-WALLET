@@ -1,0 +1,12 @@
+from fastapi import APIRouter
+
+from app.schemas.health import HealthResponse
+from app.services.health_service import build_health_response
+
+router = APIRouter(tags=["health"])
+
+
+@router.get("/health", response_model=HealthResponse, summary="Health check")
+def health_check() -> HealthResponse:
+    response = build_health_response()
+    return response
