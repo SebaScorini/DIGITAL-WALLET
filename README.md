@@ -1,85 +1,61 @@
-# Digital Wallet API
+# Digital Wallet
 
-Base backend del proyecto Digital Wallet API construida con FastAPI, SQLAlchemy, MySQL, Alembic y Docker.
+Este proyecto es una aplicación de billetera digital integrada con un backend en FastAPI y un frontend (próximamente).
 
-## Objetivo de este stage
-
-Este stage deja preparado el proyecto con una arquitectura por capas, configuracion por variables de entorno, conexion base a MySQL y un endpoint de salud.
-
-## Stack
-
-- Python
-- FastAPI
-- MySQL
-- SQLAlchemy
-- Pydantic
-- Alembic
-- Docker
-
-## Estructura
+## Estructura del Proyecto
 
 ```text
-backend/
-|-- alembic/
-|-- app/
-|   |-- core/
-|   |-- models/
-|   |-- repositories/
-|   |-- routers/
-|   |-- schemas/
-|   `-- services/
-|-- tests/
-|-- .env.example
-|-- alembic.ini
-|-- docker-compose.yml
-|-- Dockerfile
-`-- requirements.txt
+digital-wallet/
+├── README.md           # Este archivo
+├── docker-compose.yml  # Configuración de Docker para todo el proyecto
+├── .gitignore          # Archivos ignorados por Git
+├── backend/            # Directorio del Backend (FastAPI)
+│   ├── app/            # Código fuente
+│   ├── alembic/        # Migraciones de base de datos
+│   ├── Dockerfile      # Configuración de imagen para el backend
+│   └── .env            # Variables de entorno (no trackeado por Git)
+└── frontend/           # Directorio del Frontend (Próximamente)
 ```
 
-## Variables de entorno
+## Requisitos Previos
 
-1. Copiar el archivo de ejemplo:
+- Docker y Docker Compose
+- Python 3.10+ (opcional, para desarrollo local sin Docker)
+
+## Configuración y Ejecución
+
+### 1. Variables de Entorno
+Asegúrate de tener un archivo `.env` en la carpeta `backend/`. Existe un archivo `.env.example` en esa misma carpeta que puedes usar como base:
 
 ```bash
-cp .env.example .env
+cp backend/.env.example backend/.env
 ```
 
-2. Ajustar valores si fuera necesario.
-
-## Levantar el proyecto con Docker
+### 2. Levantar el proyecto con Docker
+Desde la raíz del proyecto, ejecuta:
 
 ```bash
 docker compose up --build
 ```
 
-La API queda disponible en:
+### 3. Puertos de Acceso
 
-- `http://localhost:8000`
-- `http://localhost:8000/docs`
-- `http://localhost:8000/health`
+- **API/Documentación**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Base de Datos (MySQL)**: `localhost:3307` 
 
-## Ejecutar tests
+> [!IMPORTANT]
+> Se ha configurado el puerto **3307** para la base de datos externa para evitar conflictos con instalaciones locales de MySQL que suelen usar el puerto 3306.
 
-```bash
-docker compose run --rm api pytest
-```
+## Desarrollo
 
-## Endpoint disponible
+### Base de Datos
+Si necesitas conectarte a la base de datos desde un cliente externo (como DBeaver o TablePlus):
+- **Host**: `127.0.0.1`
+- **Puerto**: `3307`
+- **Usuario**: `wallet_user`
+- **Password**: `wallet_password` (según `.env`)
 
-### GET `/health`
-
-Respuesta esperada:
-
-```json
-{
-  "status": "ok",
-  "service": "Digital Wallet API",
-  "version": "0.1.0"
-}
-```
-
-## Proximos pasos sugeridos
-
-- Crear entidades `User`, `Wallet` y `Transaction`
-- Agregar migraciones iniciales con Alembic
-- Incorporar autenticacion y logica de negocio
+### Próximos Pasos
+- [ ] Implementar autenticación JWT.
+- [ ] Crear modelos para Usuarios, Billeteras y Transacciones.
+- [ ] Iniciar el desarrollo del Frontend.
